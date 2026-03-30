@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+echo "**** fixing setuptools for Mopidy ****"
+/lsiopy/bin/pip install --no-cache-dir --force-reinstall setuptools==80.9.0

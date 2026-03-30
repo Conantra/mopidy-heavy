@@ -1,0 +1,49 @@
+version: "3.0"
+services:
+
+ mopidy:
+   image: conantra/mopidy-heavy:v1.00
+   container_name: mopidy
+   hostname: mopidy_Seedainer
+
+   environment:
+     - PUID=1061
+     - PGID=1058
+#      - PUID=1000 # user ID which the mopidy service will run as, needs permissions to access the music
+#      - PGID=1000 # group ID which the mopidy service will run as, needs permissions to access the music
+     - TZ=Europe/Warsaw
+     #
+     # https://github.com/linuxserver/docker-mods/tree/universal-package-install
+     #
+     # Set alpine or pip package ENV vars for further mopidy extensions
+     #
+     - DOCKER_MODS=linuxserver/mods:universal-package-install
+     - INSTALL_PIP_PACKAGES=Mopidy-Beets|Mopidy-dLeyna|Mopidy-InternetArchive|Mopidy-TuneIn|Mopidy-YTMusic|Mopidy-Plex
+#      - INSTALL_PACKAGES=mopidy-podcast
+   ports:
+     - 6600:6600 # Remote Control port for MPD
+     - 6680:6680 # HTML API & Webinterface port for accessing mopidy
+     - 5555:5555/udp # port for the optional snapcast FIFO output, needs to be configured in mopidy.conf
+   # devices:
+   # - /dev/snd:/dev/snd # optional, needed if you want to play to host audio devices.
+   volumes:
+#      - $MOPIROOM_FOLDER/config/:/config/
+     - /dock-volume/.volume-test/MopiRoom/config/:/config/
+
+     # contains mopidy configured FIFO location,
+     # check mopidy.conf <https://github.com/conantra/mopidy-heavy/blob/main/root/defaults/mopidy.conf>
+     # will get used by snapcast and streamed to the network.
+     #
+     # ```conf
+     # [audio]
+     # output = (...) location=/data/audio/snapcast_fifo
+     # ```
+     #
+     # mopidy--FIFO-in-FileSystem-->SnapServer--LAN-Stream-->SnapClient
+     #
+#      - $MOPIROOM_FOLDER/data/:/data/
+#      - $MOPIROOM_FOLDER/:/music/:ro # READ-ONLY & optional  (needed if you want to play audio files from host)
+     - /dock-volume/.volume-test/MopiRoom/data/:/data/
+     - /dock-volume/.volume-test/MopiRoom/music/:/music/:ro # READ-ONLY & optional  (needed if you want to play audio files from host)
+   restart: "unless-stopped"
+
