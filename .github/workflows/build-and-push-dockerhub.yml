@@ -7,8 +7,8 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: mopidy
-  NAMESPACE: sweisgerber
+  IMAGE_NAME: mopidy-heavy
+  NAMESPACE: conantra
   MOPIDY_VERSION: 3.4.2
 jobs:
   docker:
