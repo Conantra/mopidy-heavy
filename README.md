@@ -1,6 +1,6 @@
 # Mopidy (Docker Image)
 
-> Based on [debian:bookworm] & [mopidy/*](https://github.com/mopidy), as well as the [Iris Mopidy Client](https://github.com/jaedb/Iris).
+> Based on [debian:bookworm-slim] & [mopidy/*](https://github.com/mopidy), as well as the [Iris Mopidy Client](https://github.com/jaedb/Iris).
 > 
   
 

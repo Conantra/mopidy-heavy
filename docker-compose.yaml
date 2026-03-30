@@ -2,7 +2,7 @@ version: "3.0"
 services:
 
  mopidy:
-   image: conantra/mopidy-heavy:v1.00
+   image: conantra/mopidy-heavy:v1.01
    container_name: mopidy
    hostname: mopidy_Seedainer
 
